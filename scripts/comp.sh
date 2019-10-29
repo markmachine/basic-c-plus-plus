@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# gcc -lstdc++ <source_file>.cpp -o <source_file>.out
+
 help="OVERVIEW: simple C++ compile script for OSX
 
 USAGE: $(basename "$0") <source_file>
@@ -16,8 +18,10 @@ else
           FILE="$1.cpp"
           if test -f "$FILE"; then
             echo "Compiling $FILE"
-            set -x
             gcc -lstdc++ $1.cpp -o $1.out
+            printf "%s\n\n" "--- $1.cpp is compiled!"
+            ./$1.out
+            printf "\n\n%s\n" "done!"
             exit 0
           else
             echo "$FILE does not exist or cannot be compiled."
